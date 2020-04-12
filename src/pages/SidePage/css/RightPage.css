@@ -1,0 +1,73 @@
+.AllRightArea {
+    box-sizing: border-box;
+    position: fixed;
+    right: -300px;
+    top: 0px;
+    width: 300px;
+    height: 700px;
+    padding: 50px;
+    overflow: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 10px rgba(62, 85, 120, .045);
+    transition: all .3s ease;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    overflow: -moz-hidden-unscrollable;
+    z-index: 10;
+}
+
+.AllRightArea::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+}
+
+.AllRightArea::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.AllRightArea::-webkit-scrollbar-thumb {
+    background: #F5F5F5;
+}
+
+.AllRightArea>p {
+    color: #aaa;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 40px;
+}
+
+.AllRightAreaItem {
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0px 20px;
+    padding: 5% 5% 2%;
+    background-color: #878D94;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.AllRightAreaItem>img {
+    width: 100%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.AllRightAreaItemMask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.AllRightAreaItem>p {
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+}

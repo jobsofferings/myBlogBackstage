@@ -1,0 +1,88 @@
+.AllLeftArea {
+    box-sizing: border-box;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 300px;
+    height: 700px;
+    padding: 50px;
+    overflow: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 10px rgba(62, 85, 120, .045);
+    transition: all .3s ease;
+    -ms-overflow-style: none;
+    overflow: -moz-hidden-unscrollable;
+    z-index: 10;
+}
+
+.AllLeftArea::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+}
+
+.AllLeftArea::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.AllLeftArea::-webkit-scrollbar-thumb {
+    background: #F5F5F5;
+}
+
+.AllLeftArea>ul {
+    margin-bottom: 40px;
+}
+
+.LeftPartTitleOne {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8D8D8D;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.LeftPartOneLi {
+    width: 100%;
+    height: 30px;
+    margin-top: 15px;
+    color: rgba(27, 29, 93, .5);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.LeftPartOneLi:hover {
+    cursor: pointer;
+    color: rgba(27, 29, 93, 1);
+}
+
+.LeftPartOneLi:hover .LeftPartOneSvg {
+    cursor: pointer;
+    background-color: rgba(27, 29, 93, 1);
+}
+
+.LeftPartOneLi>div:nth-child(1) {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 7px 7px 7px 0px;
+    background-color: rgba(27, 29, 93, .5);
+    -webkit-mask-image: url(../../../img/管理.svg);
+    -webkit-mask-size: 16px;
+    mask-image: url(../../../img/管理.svg);
+    mask-size: 16px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.LeftPartOneLi>div:nth-child(2) {
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    font-family: Poppins, sans-serif;
+    cursor: pointer;
+}

@@ -1,0 +1,62 @@
+
+.AllCenterAreaHeaderInput {
+    position: relative;
+    width: 400px;
+    margin: 30px auto;
+}
+
+.AllCenterAreaHeaderInput>input {
+    float: left;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    width: 400px;
+    height: 50px;
+    padding: 10px 36px 10px 50px;
+    border-radius: 5px;
+    box-shadow: 0 0px 0px rgba(62, 85, 120, .045);
+    transition: all .5s ease;
+    cursor: text;
+}
+
+.AllCenterAreaHeaderInput>input:hover {
+    box-shadow: 0 30px 100px rgba(62, 85, 120, .045);
+    cursor: text;
+}
+
+.searchIcon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(27, 29, 93, .5);
+    -webkit-mask-image: url(../../../img/search.svg);
+    -webkit-mask-size: 20px;
+    mask-image: url(../../../img/search.svg);
+    mask-size: 20px;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    width: 12px;
+    height: 12px;
+    background-color: rgba(27, 29, 93, .5);
+    -webkit-mask-image: url(../../../img/叉.svg);
+    -webkit-mask-size: 12px;
+    mask-image: url(../../../img/叉.svg);
+    mask-size: 12px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.closeIcon:hover {
+    background-color: rgba(27, 29, 93, 1);
+}
+
+.AllCenterAreaHeaderInput>input::placeholder {
+    padding-left: 5px;
+    color: #ccc;
+}
