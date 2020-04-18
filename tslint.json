@@ -19,6 +19,8 @@
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "jsdoc-format": false,
-    "no-console": false
+    "no-console": false,
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": true
   }
 }

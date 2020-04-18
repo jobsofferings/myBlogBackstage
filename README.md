@@ -1,4 +1,4 @@
-### 五子棋游戏 backgammon game
+### 我的博客后台管理
 
 [TOC]
 
@@ -12,6 +12,11 @@
 
 &emsp;&emsp;做好了All、LeftPage、rightPage等部分功能,初步将TS与Redux、React结合起来
 
++ 2020-4-18 第一次更新
+
+&emsp;&emsp;新加了antd库，版本4.0.1
+&emsp;&emsp;新使用了echarts库，版本4.7.0
+&emsp;&emsp;新使用echarts更新了两个表格，新使用了antd初始化一个表格，暂时未做数据传输，接下来若干的版本会完善数据请求，在Redux的defaultState中将保存默认数据作为请求数据。
 
 #### English
 
@@ -22,3 +27,9 @@
 + 2020-4-12 First update
 
 &emsp;&emsp;Completed some functions such as All, LeftPage, rightPage, etc., and initially combined TS with Redux and React
+
++ 2020-4-18 First update
+
+&emsp;&emsp;new antd library, version 4.0.1
+&emsp;&emsp;new echarts library, version 4.7.0
+&emsp;&emsp;The new use of echarts updated two tables, the new use of antd initialization of a table, temporarily not for the data transfer, the next few versions will refine the data request, in Redux Statedefault will save the default data as the request data.

@@ -5,7 +5,9 @@ import * as actions from '../../redux/actions/index';
 import { StoreState, Item1 } from '../../redux/types/index';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import IPRequestList from './IPRequestList';
 import EchartsTable from '../Echart/EchartsTable';
+import EchartsCircleTable from '../Echart/EchartsCircleTable';
 
 interface HeadProps {
     ThreeData: Item1[];
@@ -69,7 +71,7 @@ class Head extends React.Component<HeadProps, object> {
                 <div className="AllCenterAreaBody">
                     <div className="centerItem2">
                         <div className="centerItemHead">IP request list</div>
-                        {/* <IPRequestList /> */}
+                        <IPRequestList />
                     </div>
                     <div className="centerItem3">
                         <div className="centerItemHead">Star Articles</div>
@@ -85,13 +87,13 @@ class Head extends React.Component<HeadProps, object> {
                 <div className="AllCenterAreaBody">
                     <div className="centerItem4">
                         <div className="centerItemHead">Group Percent</div>
-                        {/* <EchartsCircleTable data={{
+                        <EchartsCircleTable data={{
                             title: 'Group Percent',
                             cursorTitle: 'Group',
                             width: '100%',
                             height: '300px',
-                            dataSource: groupData.dataList
-                        }} /> */}
+                            dataSource: [{ name: '乔布斯', value: 100 }, { name: '李宇柯', value: 70 }]
+                        }} />
                     </div>
                     <div className="centerItem5">
                         <div className="centerItemHead">Group Table</div>
@@ -99,8 +101,10 @@ class Head extends React.Component<HeadProps, object> {
                             width: '100%',
                             height: '300px',
                             title: '文章中各组别文章数量统计',
-                            // xdata: groupList,
-                            // ydata: groupDataToTable,
+                            xdata: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            ydata: [[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                            [4.6, 10.8, 16, 50, 54.3, 147.4, 311.2, 344.4, 81.3, 38.8, 12.4, 5.6]],
                             legend: ['我的组别']
                         }} />
                         <div className='totalValue'>
