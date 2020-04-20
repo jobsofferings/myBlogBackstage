@@ -22,5 +22,8 @@
     "no-console": false,
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": true
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false
   }
 }

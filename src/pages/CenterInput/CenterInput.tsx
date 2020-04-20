@@ -1,24 +1,23 @@
 import * as React from 'react';
 import './css/CenterInput.css'
-import * as actions from '../../redux/actions/index';
-import { StoreState } from '../../redux/types/index';
+import * as actions from '../../redux/actions';
+import store from '../../redux/store';
+import { StoreState } from '../../redux/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ChangeEvent } from 'react';
 
-interface InputProps {
-    topInputValue: string;
-    topInput: (value: string) => void;
-}
-
-class CenterInput extends React.Component<InputProps, object> {
-
-    public constructor(props: any) {
+class CenterInput extends React.Component<StoreState, object> {
+    public readonly state: Readonly<StoreState>
+    
+    constructor(props: Readonly<StoreState>) {
         super(props);
+        this.state = store.getState()
+        store.subscribe(this.storeChange.bind(this));
     }
 
     public render() {
-        const { topInputValue } = this.props
+        const { topInputValue } = this.state;
         const { closeIconSty } = this.getStyle(topInputValue);
         return (
             <div className="AllCenterAreaHeaderInput">
@@ -37,17 +36,26 @@ class CenterInput extends React.Component<InputProps, object> {
         }
         return { closeIconSty };
     }
+
     /**
      * 修改input内部值
      **/
     private handleInputChange: (e: ChangeEvent) => void = (e: ChangeEvent<HTMLInputElement>) => {
-        this.props.topInput(e.target.value);
+        store.dispatch(actions.topInput(e.target.value))
     }
+
     /**
      * 清除input内部值
      **/
     private handleClearInput: () => void = () => {
-        this.props.topInput('');
+        store.dispatch(actions.topInput(''))
+    }
+
+    /**
+     * 绑定state监听
+     **/
+    private storeChange() {
+        this.setState(store.getState())
     }
 }
 
@@ -56,9 +64,7 @@ export function mapStateToProps(state: StoreState) {
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.AllAction>) {
-    return {
-        topInput: (value: string) => dispatch(actions.topInput(value)),
-    }
+    return {  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CenterInput);

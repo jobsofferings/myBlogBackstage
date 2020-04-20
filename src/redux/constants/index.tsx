@@ -6,3 +6,6 @@ export type RIGHT_PAGE_CONTROL_ENTHUSIASM = typeof RIGHT_PAGE_CONTROL_ENTHUSIASM
 
 export const TOP_INPUT = 'TOP_INPUT';
 export type TOP_INPUT = typeof TOP_INPUT;
+
+export const GET_IP_DATA = 'GET_IP_DATA';
+export type GET_IP_DATA = typeof GET_IP_DATA;

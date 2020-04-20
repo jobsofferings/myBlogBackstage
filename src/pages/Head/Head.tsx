@@ -2,20 +2,13 @@ import * as React from 'react';
 import './css/Head.css'
 import { NumAutoPlusAnimation } from '../../myFun/function'
 import * as actions from '../../redux/actions/index';
-import { StoreState, Item1 } from '../../redux/types/index';
+import store from '../../redux/store/index';
+import { StoreState } from '../../redux/types/index';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import IPRequestList from './IPRequestList';
 import EchartsTable from '../Echart/EchartsTable';
 import EchartsCircleTable from '../Echart/EchartsCircleTable';
-
-interface HeadProps {
-    ThreeData: Item1[];
-}
-
-interface CenterItem1Props {
-    style: Item1Style[]
-}
 
 interface Item1Style {
     id: number;
@@ -23,27 +16,30 @@ interface Item1Style {
     width: string;
 }
 
-const colorList: string[] = ['#FFCD36', '#5780F7', '#06BA54'];
+class Head extends React.Component<StoreState, object> {
+    public readonly state: Readonly<StoreState>
+    private colorList: string[] = ['#FFCD36', '#5780F7', '#06BA54'];
+    private style: Item1Style[] = [];
 
-class Head extends React.Component<HeadProps, object> {
-
-    public readonly state: Readonly<CenterItem1Props> = {
-        style: []
+    constructor(props: Readonly<StoreState>) {
+        super(props);
+        this.state = store.getState()
+        store.subscribe(this.storeChange.bind(this));
     }
 
     public componentDidMount() {
-        const { ThreeData } = this.props;
+        const { ThreeData } = this.state;
         for (let i = 0; i < ThreeData.length; i++) {
             NumAutoPlusAnimation(document.getElementById(`data${i}`), ThreeData[i].num, ThreeData[i].unit, 1);
-            const style = this.state.style;
-            const item = {
+            const { style } = this;
+            style.push({
                 id: i,
-                backgroundColor: colorList[i],
+                backgroundColor: this.colorList[i],
                 width: `${ThreeData[i].num / ThreeData[i].all * 100}%`,
-            };
-            style.push(item);
-            this.setState({ style })
+            });
+            this.style = style;
         }
+        this.setState({})
     }
 
     public render() {
@@ -109,12 +105,16 @@ class Head extends React.Component<HeadProps, object> {
                         }} />
                         <div className='totalValue'>
                             共<span className='red'>{totalValue}</span>条文章记录
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     }
+
+    /**
+     * 三个数据块的渲染
+     **/
     private renderThreeData: () => JSX.Element[] = () => {
         const { ThreeData } = this.props;
         return ThreeData.map((item, index) => {
@@ -125,13 +125,24 @@ class Head extends React.Component<HeadProps, object> {
                     <p id={`data${index}`}>0{item.unit}</p>
                 </div>
                 <div className="centerItem1Line">
-                    <div className="centerItem1LineIn" style={{ ...this.state.style[index] }} />
+                    <div className="centerItem1LineIn" style={{ ...this.style[index] }} />
                 </div>
             </div>
         })
     }
+
+    /**
+     * 渲染明星文章
+     **/
     private renderStarArticles() {
         return <div />
+    }
+
+    /**
+    * 绑定state监听
+    **/
+    private storeChange() {
+        this.setState(store.getState())
     }
 }
 
@@ -140,9 +151,7 @@ export function mapStateToProps(state: StoreState) {
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.AllAction>) {
-    return {
-        // topInput: (value: string) => dispatch(actions.topInput(value)),
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Head);

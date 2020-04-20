@@ -7,7 +7,17 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 interface InputProps {
-    name?: string
+    dataSource: DataSourceItem[],
+    columns: Table.ColumnsType,
+    style: React.CSSProperties,
+    pagination: Table.TablePaginationConfig,
+}
+
+interface DataSourceItem {
+    key?: string,
+    newTime: number,
+    clientIP: string,
+    number: number
 }
 
 class AntdTable extends React.Component<InputProps, object> {
@@ -17,9 +27,12 @@ class AntdTable extends React.Component<InputProps, object> {
     }
 
     public render() {
+        const { columns, style, pagination } = this.props;
+        let { dataSource } = this.props;
+        dataSource = dataSource.map((item: any) => ({ ...item, key: item._id }))
         return (
             <div>
-                <Table.default>11</Table.default>
+                <Table.default dataSource={dataSource} style={style} columns={columns} pagination={pagination} />
             </div>
         );
     }
@@ -30,9 +43,7 @@ export function mapStateToProps(state: StoreState) {
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.AllAction>) {
-    return {
-        // topInput: (value: string) => dispatch(actions.topInput(value)),
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AntdTable);

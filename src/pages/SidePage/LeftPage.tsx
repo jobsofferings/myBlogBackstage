@@ -7,47 +7,45 @@ import { Dispatch } from 'redux';
 
 export interface LeftProps {
     leftSideSty: object;
-    onLeftPageControl?: () => void;
 }
 
-const partOneTitle = [{
-    title: '首页',
-    router: '/'
-}];
-const partTwoTitle = [{
-    title: '文章发布',
-    router: '/post'
-}, {
-    title: '查看文章详情',
-    router: '/details'
-}]
-const TitleList = [partOneTitle, partTwoTitle];
-const groupList = ['总体功能', '文章功能'];
-
 class LeftPage extends React.Component<LeftProps, object> {
-
-    public constructor(props: any) {
+    private TitleList = [[{
+        title: '首页',
+        router: '/'
+    }], [{
+        title: '文章发布',
+        router: '/post'
+    }, {
+        title: '查看文章详情',
+        router: '/details'
+    }]];
+    private groupList = ['总体功能', '文章功能'];
+    public constructor(props: LeftProps) {
         super(props);
     }
 
     public render() {
-        const {  leftSideSty } = this.props;
+        const { leftSideSty } = this.props;
         return (
             <div className="AllLeftArea" style={leftSideSty}>
                 {
-                    TitleList.map((item, index) => {
+                    this.TitleList.map((item, index) => {
                         return this.bindTitle(item, index);
                     })
                 }
             </div>
         );
     }
-    // 渲染左侧导航栏
+
+    /**
+     * 渲染左侧导航栏
+     **/
     private bindTitle(titleList: any[], index: number) {
         const tempList = [null, null];
         return tempList.map((item1, index1) => {
             if (!index1) {
-                return <p className="LeftPartTitleOne" key={index1}>{groupList[index]}</p>;
+                return <p className="LeftPartTitleOne" key={index1}>{this.groupList[index]}</p>;
             } else {
                 return <ul className="LeftPartOne" key={index1}>
                     {
@@ -69,9 +67,7 @@ export function mapStateToProps(state: StoreState) {
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.AllAction>) {
-    return {
-        onLeftPageControl: () => dispatch(actions.inLeftPageControl()),
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftPage);

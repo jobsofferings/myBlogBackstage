@@ -4,23 +4,12 @@ import * as actions from '../../redux/actions/index';
 import { StoreState } from '../../redux/types/index';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { isInTheDom } from '../../myFun/function'
+import store from '../../redux/store'
+import Head from '../Head/Head'
 import LeftPage from '../SidePage/LeftPage'
 import RightPage from '../SidePage/RightPage'
 import CenterInput from '../CenterInput/CenterInput'
-import Head from '../Head/Head'
-import { isInTheDom } from '../../myFun/function'
-
-interface AllProps {
-    leftPageFlag: boolean;
-    rightPageFlag: boolean;
-    onLeftPageControl: () => void;
-    onRightPageControl: () => void;
-}
-
-interface MyProps {
-    leftSty: LeftProps;
-    rightSty: RightProps
-}
 
 interface LeftProps {
     left: string;
@@ -32,17 +21,26 @@ interface RightProps {
     height: string;
 }
 
-class All extends React.Component<AllProps, object> {
-    public readonly state: Readonly<MyProps> = {
-        leftSty: {
-            left: '-300px',
-            height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
-        },
-        rightSty: {
-            right: '-300px',
-            height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
-        }
+class All extends React.Component<StoreState, object> {
+    public readonly state: Readonly<StoreState>
+    private clientHeight = `${document.documentElement.clientHeight || document.body.clientHeight}px`;
+    private leftStyle: LeftProps = {
+        left: '-300px',
+        height: this.clientHeight
     }
+    private rightStyle: RightProps = {
+        right: '-300px',
+        height: this.clientHeight
+    }
+
+    constructor(props: Readonly<StoreState>) {
+        super(props);
+        this.state = store.getState()
+        store.subscribe(this.storeChange.bind(this));
+        this.leftPageControl = this.leftPageControl.bind(this);
+        this.rightPageControl = this.rightPageControl.bind(this);
+    }
+
     public componentDidMount() {
         this.resize();
         window.addEventListener('resize', () => {
@@ -51,7 +49,10 @@ class All extends React.Component<AllProps, object> {
         window.addEventListener('click', (e) => {
             this.controlBack(e);
         })
+        // 请求数据
+        store.dispatch(actions.getIPData())
     }
+
     public render() {
         const { rightSty, iconAllSty, iconOnePartSty, iconThreePartSty, leftSideSty, rightSideSty } = this.getStyle();
         return (
@@ -59,7 +60,7 @@ class All extends React.Component<AllProps, object> {
                 <LeftPage leftSideSty={leftSideSty} />
                 <div className="AllCenterArea" style={rightSty}>
                     <div className="AllCenterAreaHeader">
-                        <div style={iconAllSty} className="AllCenterAreaHeaderIconArea" onClick={this.props.onLeftPageControl}>
+                        <div style={iconAllSty} className="AllCenterAreaHeaderIconArea" onClick={this.leftPageControl}>
                             <p style={iconOnePartSty} />
                             <p />
                             <p style={iconThreePartSty} />
@@ -67,7 +68,7 @@ class All extends React.Component<AllProps, object> {
                         <p>jobofferings</p>
                         <CenterInput />
                         <div className="AllCenterAreaHeaderRight">
-                            <div className="menuIcon" onClick={this.props.onRightPageControl} />
+                            <div className="menuIcon" onClick={this.rightPageControl} />
                             <div className="vertIcon" />
                         </div>
                     </div>
@@ -77,11 +78,26 @@ class All extends React.Component<AllProps, object> {
             </div>
         );
     }
+
+    /**
+     * 左侧页面伸缩控制
+     **/
+    private leftPageControl() {
+        store.dispatch(actions.inLeftPageControl());
+    }
+
+    /**
+     * 右侧页面伸缩控制
+     **/
+    private rightPageControl() {
+        store.dispatch(actions.inRightPageControl())
+    }
+
     /**
      * 把制作Style提取出来
      **/
     private getStyle() {
-        const { leftPageFlag, rightPageFlag } = this.props;
+        const { leftPageFlag, rightPageFlag } = this.state;
         const rightSty = {
             transform: `${leftPageFlag ? 'translateX(300px)' : 'translateX(0px)'}`
         };
@@ -102,46 +118,44 @@ class All extends React.Component<AllProps, object> {
             top: `${leftPageFlag ? '-2px' : '0px'}`
         }
         const leftSideSty: LeftProps = {
-            height: this.state.leftSty.height,
+            height: this.leftStyle.height,
             left: `${leftPageFlag ? '0px' : '-300px'}`
         }
         const rightSideSty: RightProps = {
-            height: this.state.rightSty.height,
+            height: this.rightStyle.height,
             right: `${rightPageFlag ? '0px' : '-300px'}`
         }
         return { rightSty, iconAllSty, iconOnePartSty, iconThreePartSty, leftSideSty, rightSideSty };
     }
+
     /**
      * 修改左侧高度
      **/
     private resizeLeft() {
-        const { leftSty } = this.state;
-        this.setState({
-            leftSty: {
-                ...leftSty,
-                height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
-            }
-        })
+        this.leftStyle = {
+            ...this.leftStyle,
+            height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
+        }
     }
+
     /**
      * 修改右侧高度
      **/
     private resizeRight() {
-        const { rightSty } = this.state;
-        this.setState({
-            rightSty: {
-                ...rightSty,
-                height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
-            }
-        })
+        this.rightStyle = {
+            ...this.rightStyle,
+            height: `${document.documentElement.clientHeight || document.body.clientHeight}px`
+        }
     }
+
     /**
-     * 修改两侧高度
+     * 根据窗口高度修改两侧高度
      **/
     private resize() {
         this.resizeLeft();
         this.resizeRight();
     }
+
     /**
      * 绑定两侧位置复原函数
      **/
@@ -154,7 +168,7 @@ class All extends React.Component<AllProps, object> {
             const AllLeftArea = document.getElementsByClassName('AllLeftArea')[0];
             const leftFlag = isInTheDom(AllLeftArea, e);
             if (!leftFlag) {
-                this.props.onLeftPageControl();
+                store.dispatch(actions.inLeftPageControl())
             }
         }
         // 右
@@ -164,23 +178,25 @@ class All extends React.Component<AllProps, object> {
             const AllRightArea = document.getElementsByClassName('AllRightArea')[0];
             const rightFlag = isInTheDom(AllRightArea, e);
             if (!rightFlag) {
-                this.props.onRightPageControl();
+                store.dispatch(actions.inRightPageControl())
             }
         }
+    }
+
+    /**
+     * 绑定state监听
+     **/
+    private storeChange() {
+        this.setState(store.getState())
     }
 }
 
 export function mapStateToProps(state: StoreState) {
-    return {
-        ...state
-    }
+    return { ...state }
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.AllAction>) {
-    return {
-        onLeftPageControl: () => dispatch(actions.inLeftPageControl()),
-        onRightPageControl: () => dispatch(actions.inRightPageControl()),
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(All);
