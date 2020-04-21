@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as actions from '../../redux/actions';
 import store from '../../redux/store';
-import { StoreState } from '../../redux/types';
+import { StoreState, DataListItem } from '../../redux/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { timerToStr } from '../../myFun/function'
@@ -29,13 +29,13 @@ class IPRequestList extends React.Component<StoreState, object> {
                         {
                             title: '最新查看时间',
                             dataIndex: 'newTime',
-                            render: (newTime: string) => timerToStr(parseInt(newTime,10)),
-                            sorter: (a: any, b: any) => b.newTime - a.newTime,
+                            render: (newTime: string) => timerToStr(parseInt(newTime, 10)),
+                            sorter: (a: DataListItem, b: DataListItem) => b.newTime - a.newTime,
                         },
                         {
                             title: '总次数',
                             dataIndex: 'number',
-                            sorter: (a: any, b: any) => b.number - a.number,
+                            sorter: (a: DataListItem, b: DataListItem) => b.number - a.number,
                         },
                     ]
                 }

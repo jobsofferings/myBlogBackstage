@@ -7,7 +7,7 @@ import { Dispatch } from 'redux';
 import themeList from '../../pages/All/theme'
 
 export interface RightProps {
-    rightSideSty: object;
+    rightSideSty: React.CSSProperties;
 }
 
 class RightPage extends React.Component<RightProps, object> {

@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 export interface LeftProps {
-    leftSideSty: object;
+    leftSideSty: React.CSSProperties;
 }
 
 class LeftPage extends React.Component<LeftProps, object> {
+    
     private TitleList = [[{
         title: '首页',
         router: '/'
@@ -21,6 +22,7 @@ class LeftPage extends React.Component<LeftProps, object> {
         router: '/details'
     }]];
     private groupList = ['总体功能', '文章功能'];
+
     public constructor(props: LeftProps) {
         super(props);
     }

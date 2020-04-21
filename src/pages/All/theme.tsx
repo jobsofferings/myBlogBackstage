@@ -8,9 +8,9 @@ interface ThemeItemProps {
 }
 
 interface MyDefinedStyle {
-    backStyle: object,
-    jobsStyle: object,
-    MenuStyle: object,
+    backStyle: React.CSSProperties,
+    jobsStyle: React.CSSProperties,
+    MenuStyle: React.CSSProperties,
 }
 
 const themeList: ThemeItemProps[] = [
@@ -44,4 +44,5 @@ const themeList: ThemeItemProps[] = [
         }
     }
 ]
+
 export default themeList;

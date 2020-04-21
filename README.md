@@ -36,6 +36,10 @@
 &emsp;&emsp;在Redux的defaultState中将保存默认数据作为请求数据。若希望自己进行请求，请在api.js与package.json中修改请求路径。<br>
 &emsp;&emsp;后面的版本会加入react-router以及部分代码完善。<br>
 
++ 2020-4-21 第一次更新
+
+&emsp;&emsp;整理了一部分代码储存位置，及类型接口<br>
+
 #### English
 
 &emsp;&emsp;This is a background management project of React + Ts + Redux made by **jobsofferings**. Not completed yet, I hope to complete this project through my commit. The project already has a JS version, but I hope that through this completion, I can combine TS with React + Redux and requests, thank you.<br>
@@ -62,10 +66,14 @@ Open browser access `http://localhost:3000/`
 &emsp;&emsp;new echarts library, version 4.7.0.<br>
 &emsp;&emsp;The new use of echarts updated two tables, the new use of antd initialization of a table, temporarily not for the data transfer, the next few versions will refine the data request, in Redux Statedefault will save the default data as the request data.<br>
 
-+ 2020-4-20 第一次更新
++ 2020-4-20 First update
 
 &emsp;&emsp;Newly added redux-thunk library, version 2.3.0.<br>
 &emsp;&emsp;Changed the reducer and store again to make their interaction more in line with the redux principle.<br>
 &emsp;&emsp;note! This is a big change! A lot of internal logic has been modified, please use the third version, the first two versions are discarded versions.<br>
 &emsp;&emsp;The default data will be saved as request data in Redux's defaultState. If you want to make your own request, please modify the request path in api.js and package.json.<br>
 &emsp;&emsp;Later versions will add react-router and some code improvements.<br>
+
++ 2020-4-21 First update
+
+&emsp;&emsp;Organized some code storage locations and type interfaces<br>

@@ -23,7 +23,7 @@ interface EchartsData {
     textColor?: string,
     itemColor?: string,
     labelColor?: string,
-    style?: object
+    style?: React.CSSProperties
 }
 
 const defaultWidth = '100%';

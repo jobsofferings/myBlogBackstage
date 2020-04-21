@@ -7,11 +7,11 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-
 ReactDOM.render(
   <Provider store={store}>
     <All />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
+
 registerServiceWorker();

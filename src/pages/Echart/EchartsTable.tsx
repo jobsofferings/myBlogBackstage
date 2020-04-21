@@ -20,16 +20,16 @@ interface EchartsData {
     xdata: any[],
     ydata: any[],
     legend: ['我的组别'],
-    style?: object
+    style?: React.CSSProperties
 }
 
-const defaultType = 'bar';
-const defaultWidth = '100%';
-const defaultHeight = '300px';
-const getRandomID = () => `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`
-const id = getRandomID();
-
 class EchartsTable extends React.Component<EchartsProps, object> {
+
+    private defaultType = 'bar';
+    private defaultWidth = '100%';
+    private defaultHeight = '300px';
+    private getRandomID = () => `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`
+    public id = this.getRandomID();
 
     public constructor(props: any) {
         super(props);
@@ -37,7 +37,7 @@ class EchartsTable extends React.Component<EchartsProps, object> {
     public componentDidUpdate() {
         const { ydata } = this.props.data;
         if (ydata.length) {
-            const myChart = echarts.init(document.getElementById(id) as HTMLDivElement);
+            const myChart = echarts.init(document.getElementById(this.id) as HTMLDivElement);
             window.addEventListener("resize", () => {
                 myChart.resize();
             });
@@ -47,7 +47,7 @@ class EchartsTable extends React.Component<EchartsProps, object> {
             for (let i = 0; i < ydata.length; i++) {
                 const item = {
                     name: legend[i],
-                    type: defaultType,
+                    type: this.defaultType,
                     data: ydata[i],
                     // smooth: true,
                     markPoint: {
@@ -114,7 +114,7 @@ class EchartsTable extends React.Component<EchartsProps, object> {
     public render() {
         const { width, height, style } = this.props.data;
         return (
-            <div id={id} style={{ width: width ? width : defaultWidth, height: height ? height : defaultHeight, ...style }} /> 
+            <div id={this.id} style={{ width: width ? width : this.defaultWidth, height: height ? height : this.defaultHeight, ...style }} />
         );
     }
 }
