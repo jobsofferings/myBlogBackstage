@@ -40,6 +40,10 @@
 
 &emsp;&emsp;整理了一部分代码储存位置，及类型接口<br>
 
++ 2020-4-22 第一次更新
+
+&emsp;&emsp;避免了一个`Declaration of private instance field not allowed after declaration of private instance method. Instead, this should come at the beginning of the class/interface`的BUG<br>
+
 #### English
 
 &emsp;&emsp;This is a background management project of React + Ts + Redux made by **jobsofferings**. Not completed yet, I hope to complete this project through my commit. The project already has a JS version, but I hope that through this completion, I can combine TS with React + Redux and requests, thank you.<br>
@@ -77,3 +81,7 @@ Open browser access `http://localhost:3000/`
 + 2020-4-21 First update
 
 &emsp;&emsp;Organized some code storage locations and type interfaces<br>
+
++ 2020-4-22 First update
+
+&emsp;&emsp;Avoided a BUG of `Declaration of private instance field not allowed after declaration of private instance method. Instead, this should come at the beginning of the class / interface`<br>

@@ -25,15 +25,15 @@ interface EchartsData {
 
 class EchartsTable extends React.Component<EchartsProps, object> {
 
+    private id = `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`
     private defaultType = 'bar';
     private defaultWidth = '100%';
     private defaultHeight = '300px';
-    private getRandomID = () => `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`
-    public id = this.getRandomID();
 
     public constructor(props: any) {
         super(props);
     }
+
     public componentDidUpdate() {
         const { ydata } = this.props.data;
         if (ydata.length) {
