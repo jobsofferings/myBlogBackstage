@@ -3,7 +3,8 @@ export interface StoreState {
     rightPageFlag: boolean,
     topInputValue: string,
     ThreeData: Item1[],
-    ipData: GetIpDateProps
+    ipData: GetIpDateProps,
+    StarArticlesData: GetStartArticlesDateProps;
 }
 
 export interface Item1 {
@@ -16,12 +17,26 @@ export interface Item1 {
 }
 
 export interface GetIpDateProps {
-    dataList: DataListItem[];
+    dataList: IpDataListItem[];
 }
 
-export interface DataListItem {
+export interface IpDataListItem {
     _id: string,
     clientIP: string,
     newTime: number,
     number: number,
+}
+
+export interface GetStartArticlesDateProps {
+    dataList: ArticlesDataListItem[];
+}
+
+export interface ArticlesDataListItem {
+    _id: string,
+    author:string
+    description:string,
+    group:number,
+    headImg: string,
+    title: string,
+    time: number,
 }

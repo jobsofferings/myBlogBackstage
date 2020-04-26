@@ -49,8 +49,10 @@ class All extends React.Component<StoreState, object> {
         window.addEventListener('click', (e) => {
             this.controlBack(e);
         })
-        // 请求数据
-        store.dispatch(actions.getIPData())
+        // 请求IP数据
+        store.dispatch(actions.getIPData());
+        // 请求明星文章数据
+        store.dispatch(actions.getStarArticle({ length: 5 }));
     }
 
     public render() {

@@ -1,6 +1,7 @@
 import * as constants from '../constants'
-import { getIPDataApi } from '../../myFun/api'
-import { GetIpDateProps } from '../types';
+import { getIPDataApi, getStarArticlesApi } from '../../myFun/api'
+import { GetIpDateProps, GetStartArticlesDateProps, ArticlesDataListItem } from '../types';
+import { Dispatch } from 'redux';
 
 export interface LeftEnthusiasm {
     type: constants.LEFT_PAGE_CONTROL_ENTHUSIASM;
@@ -22,7 +23,15 @@ export interface GetIPDataBackEnthusiasm {
     res: GetIpDateProps
 }
 
-export type AllAction = LeftEnthusiasm | RightEnthusiasm | TopInputEnthusiasm | GetIPDataBackEnthusiasm;
+export type GetStarArticlesEnthusiasm = (dispatch: any) => void;
+
+export interface GetStarArticlesBackEnthusiasm {
+    type: constants.GET_STAR_ARTICLES;
+    res: GetStartArticlesDateProps
+}
+
+export type AllAction = LeftEnthusiasm | RightEnthusiasm | TopInputEnthusiasm | GetIPDataBackEnthusiasm | GetStarArticlesBackEnthusiasm;
+
 export type withAction = GetIPDataEnthusiasm;
 
 /**
@@ -54,40 +63,53 @@ export function topInput(value: string): TopInputEnthusiasm {
 }
 
 /**
- * 控制顶部input内部数据
+ * 获取IP数据
  **/
 export function getIPData(): GetIPDataEnthusiasm {
-    return (dispatch: any) => {
-        getIPDataApi().then((res: any) => {
+    return (dispatch: Dispatch) => {
+        getIPDataApi().then((res: GetIpDateProps) => {
             dispatch(getIPDataBack(res));
-        }).catch((err: any) => {
+        }).catch((err: Error) => {
             console.log(err);
         })
     };
-    // return (dispatch) => {
-    //     getIPDataApi().then(res => {
-    //         const action = getIPDataBack(res);
-    //         dispatch(action);
-    //         // const action1 = setLoading(false);
-    //         // dispatch(action1);
-
-    //     }).catch(err => {
-    //         console.log(err);
-    //     })
-    // }
-    // return {
-    //     type: constants.GET_IP_DATA,
-    // }
-    // getIPDataApi
 }
 
 
 /**
- * 控制顶部input内部数据
+ * 获取IP数据的回调
  **/
 function getIPDataBack(res: GetIpDateProps): GetIPDataBackEnthusiasm {
     return {
         type: constants.GET_IP_DATA,
+        res
+    }
+}
+
+export interface GetStarArticleArgs {
+    length: number
+}
+
+/**
+ * 获取明星数据
+ **/
+export function getStarArticle(req: GetStarArticleArgs): GetStarArticlesEnthusiasm {
+    return (dispatch: Dispatch) => {
+        getStarArticlesApi(req).then((res: ArticlesDataListItem[]) => {
+            dispatch(getStarArticleBack({ dataList: res }));
+        }).catch((err: Error) => {
+            console.log(err);
+        })
+    };
+}
+
+
+/**
+ * 获取明星数据的回调
+ **/
+function getStarArticleBack(res: GetStartArticlesDateProps): GetStarArticlesBackEnthusiasm {
+    return {
+        type: constants.GET_STAR_ARTICLES,
         res
     }
 }

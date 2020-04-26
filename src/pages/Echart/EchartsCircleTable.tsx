@@ -26,20 +26,18 @@ interface EchartsData {
     style?: React.CSSProperties
 }
 
-const defaultWidth = '100%';
-const defaultHeight = '300px';
-const getRandomID = () => `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`
-const id = getRandomID();
-
 class EchartsCircleTable extends React.Component<EchartsProps, object> {
-
+    private defaultWidth = '100%';
+    private defaultHeight = '300px';
+    private id = `a${Number(Math.random().toString().substr(4, 10) + Date.now()).toString(36)}`;
+    
     public constructor(props: any) {
         super(props);
     }
     public componentDidUpdate() {
         const { dataSource } = this.props.data;
         if (dataSource.length) {
-            const myChart = echarts.init(document.getElementById(id) as HTMLDivElement);
+            const myChart = echarts.init(document.getElementById(this.id) as HTMLDivElement);
             window.addEventListener("resize", () => {
                 myChart.resize();
             });
@@ -89,7 +87,7 @@ class EchartsCircleTable extends React.Component<EchartsProps, object> {
                 ],
                 tooltip: {
                     formatter: `{a} <br/>{b} : {c} ({d}%)`,
-                    Format:'series'
+                    Format: 'series'
                 },
             };
             myChart.setOption(option);
@@ -98,7 +96,7 @@ class EchartsCircleTable extends React.Component<EchartsProps, object> {
     public render() {
         const { width, height, style } = this.props.data;
         return (
-            <div id={id} style={{ width: width ? width : defaultWidth, height: height ? height : defaultHeight, ...style }} />
+            <div id={this.id} style={{ width: width ? width : this.defaultWidth, height: height ? height : this.defaultHeight, ...style }} />
         );
     }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './css/Head.css'
-import { NumAutoPlusAnimation } from '../../myFun/function'
+import { NumAutoPlusAnimation, timerToEngStr } from '../../myFun/function'
 import * as actions from '../../redux/actions/index';
 import store from '../../redux/store/index';
 import { StoreState } from '../../redux/types/index';
@@ -134,9 +134,23 @@ class Head extends React.Component<StoreState, object> {
     /**
      * 渲染明星文章
      **/
-    private renderStarArticles() {
-        return <div />
+    // private renderStarArticles() {
+    //     return <div />
+    // }
+    private renderStarArticles: () => JSX.Element[] = () => {
+        const { StarArticlesData } = this.state;
+        console.log(StarArticlesData);
+        return StarArticlesData.dataList.map((item, index) => {
+            return <div className="starArticleItem" key={index}>
+                <img className="starArticleHeadImg" src={item.headImg} />
+                <div>
+                    <p>{item.title}</p>
+                    <p>{timerToEngStr(item.time)}</p>
+                </div>
+            </div>
+        })
     }
+
 
     /**
     * 绑定state监听

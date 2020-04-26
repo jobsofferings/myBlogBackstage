@@ -1,7 +1,5 @@
 ### 我的博客后台管理
 
-[TOC]
-
 #### 中文
 
 &emsp;&emsp;这是 **jobsofferings** 做的一个React+Ts+Redux的后台管理项目。暂时未完成，希望通过我的commit能够将此项目补全。该项目已有JS版本，但是希望通过这次的补全，能将TS与React+Redux、请求结合起来，谢谢。<br>
@@ -44,6 +42,13 @@
 
 &emsp;&emsp;避免了一个`Declaration of private instance field not allowed after declaration of private instance method. Instead, this should come at the beginning of the class/interface`的BUG<br>
 
++ 2020-4-26 第一次更新
+
+&emsp;&emsp;已入职，可能更新频率会减缓，望体谅~<br>
+&emsp;&emsp;新更新一个表，已在Redux的defaultState中将保存默认数据作为请求数据，若报错请注释掉请求语句<br>
+&emsp;&emsp;`pages/All/All.tsx` 中的`componentDidMount`函数中<br>
+&emsp;&emsp;修改了部分类型<br>
+
 #### English
 
 &emsp;&emsp;This is a background management project of React + Ts + Redux made by **jobsofferings**. Not completed yet, I hope to complete this project through my commit. The project already has a JS version, but I hope that through this completion, I can combine TS with React + Redux and requests, thank you.<br>
@@ -85,3 +90,10 @@ Open browser access `http://localhost:3000/`
 + 2020-4-22 First update
 
 &emsp;&emsp;Avoided a BUG of `Declaration of private instance field not allowed after declaration of private instance method. Instead, this should come at the beginning of the class / interface`<br>
+
++ 2020-4-26 First update
+
+&emsp;&emsp;Have joined the job, the update frequency may be slowed down, hope to understand ~<br>
+&emsp;&emsp;A new table has been updated. The default data has been saved in Redux's defaultState as request data. If an error is reported, please comment out the request statement<br>
+&emsp;&emsp;In the `componentDidMount` function in` pages / All / All.tsx`<br>
+&emsp;&emsp;Modified some types<br>

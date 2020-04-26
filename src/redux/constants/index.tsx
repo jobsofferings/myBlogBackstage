@@ -9,3 +9,6 @@ export type TOP_INPUT = typeof TOP_INPUT;
 
 export const GET_IP_DATA = 'GET_IP_DATA';
 export type GET_IP_DATA = typeof GET_IP_DATA;
+
+export const GET_STAR_ARTICLES = 'GET_STAR_ARTICLES';
+export type GET_STAR_ARTICLES = typeof GET_STAR_ARTICLES;
