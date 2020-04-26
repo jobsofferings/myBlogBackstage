@@ -43,7 +43,17 @@ class Head extends React.Component<StoreState, object> {
     }
 
     public render() {
-        const totalValue = 0;
+        const { groupData } = this.state;
+        let totalValue = 0;
+        const groupList: string[] = [];
+        const groupDataToTable = [];
+        const groupDataToTableInOne: number[] = [];
+        groupData.dataList.map(item => {
+            groupList.push(item.group);
+            groupDataToTableInOne.push(item.value);
+            totalValue += item.value;
+        })
+        groupDataToTable.push(groupDataToTableInOne);
         // let groupData = {
         //     dataList: []
         // }
@@ -97,11 +107,40 @@ class Head extends React.Component<StoreState, object> {
                             width: '100%',
                             height: '300px',
                             title: '文章中各组别文章数量统计',
-                            xdata: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-                            ydata: [[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                            [4.6, 10.8, 16, 50, 54.3, 147.4, 311.2, 344.4, 81.3, 38.8, 12.4, 5.6]],
-                            legend: ['我的组别']
+                            xdata: groupList,
+                            ydata: groupDataToTable,
+                            legend: [{
+                                name: '我的组别1',
+                                icon: 'circle',
+                                // 设置文本为红色
+                                textStyle: {
+                                    color: 'red'
+                                },
+                            }, {
+                                name: '我的组别2',
+                                icon: 'circle',
+                                textStyle: {
+                                    color: 'green'
+                                },
+                            }, {
+                                name: '我的组别3',
+                                icon: 'circle',
+                                textStyle: {
+                                    color: 'red'
+                                },
+                            }, {
+                                name: '我的组别4',
+                                icon: 'circle',
+                                textStyle: {
+                                    color: 'green'
+                                },
+                            }, {
+                                name: '我的组别5',
+                                icon: 'circle',
+                                textStyle: {
+                                    color: 'red'
+                                },
+                            }]
                         }} />
                         <div className='totalValue'>
                             共<span className='red'>{totalValue}</span>条文章记录
@@ -134,12 +173,8 @@ class Head extends React.Component<StoreState, object> {
     /**
      * 渲染明星文章
      **/
-    // private renderStarArticles() {
-    //     return <div />
-    // }
     private renderStarArticles: () => JSX.Element[] = () => {
         const { StarArticlesData } = this.state;
-        console.log(StarArticlesData);
         return StarArticlesData.dataList.map((item, index) => {
             return <div className="starArticleItem" key={index}>
                 <img className="starArticleHeadImg" src={item.headImg} />

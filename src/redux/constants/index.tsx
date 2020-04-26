@@ -12,3 +12,6 @@ export type GET_IP_DATA = typeof GET_IP_DATA;
 
 export const GET_STAR_ARTICLES = 'GET_STAR_ARTICLES';
 export type GET_STAR_ARTICLES = typeof GET_STAR_ARTICLES;
+
+export const GET_ALL_GROUP_LENGTH = 'GET_ALL_GROUP_LENGTH';
+export type GET_ALL_GROUP_LENGTH = typeof GET_ALL_GROUP_LENGTH;

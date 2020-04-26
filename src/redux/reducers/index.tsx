@@ -2,7 +2,7 @@
 
 import { AllAction } from '../actions';
 import { StoreState } from '../types/index';
-import { LEFT_PAGE_CONTROL_ENTHUSIASM, RIGHT_PAGE_CONTROL_ENTHUSIASM, TOP_INPUT, GET_IP_DATA, GET_STAR_ARTICLES } from '../constants/index';
+import { LEFT_PAGE_CONTROL_ENTHUSIASM, RIGHT_PAGE_CONTROL_ENTHUSIASM, TOP_INPUT, GET_IP_DATA, GET_STAR_ARTICLES, GET_ALL_GROUP_LENGTH } from '../constants/index';
 
 const defaultState: StoreState = {
   leftPageFlag: false,
@@ -103,8 +103,11 @@ const defaultState: StoreState = {
       time: 1544140800000,
       title: "input输入框添加内部图标",
       _id: "5df36fcd193000003c004ab3"
-    }]
-  }
+    }],
+  },
+  groupData: {
+    dataList: []
+  },
 }
 
 export default function enthusiasm(state: StoreState = defaultState, action: AllAction): StoreState {
@@ -119,6 +122,8 @@ export default function enthusiasm(state: StoreState = defaultState, action: All
       return { ...state, ipData: { dataList: action.res.dataList } }
     case GET_STAR_ARTICLES:
       return { ...state, StarArticlesData: { dataList: action.res.dataList } }
+    case GET_ALL_GROUP_LENGTH:
+      return { ...state, groupData: { dataList: action.res } }
   }
   return state;
 }

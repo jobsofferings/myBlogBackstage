@@ -5,6 +5,7 @@ export interface StoreState {
     ThreeData: Item1[],
     ipData: GetIpDateProps,
     StarArticlesData: GetStartArticlesDateProps;
+    groupData: GetAllGroupLengthProps;
 }
 
 export interface Item1 {
@@ -33,10 +34,20 @@ export interface GetStartArticlesDateProps {
 
 export interface ArticlesDataListItem {
     _id: string,
-    author:string
-    description:string,
-    group:number,
+    author: string
+    description: string,
+    group: number,
     headImg: string,
     title: string,
     time: number,
+}
+
+export interface GetAllGroupLengthProps {
+    dataList: AllGroupItem[];
+}
+
+export interface AllGroupItem {
+    group: string,
+    groupId: number,
+    value: number,
 }

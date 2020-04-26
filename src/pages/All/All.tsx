@@ -53,6 +53,8 @@ class All extends React.Component<StoreState, object> {
         store.dispatch(actions.getIPData());
         // 请求明星文章数据
         store.dispatch(actions.getStarArticle({ length: 5 }));
+        // 请求明星文章数据
+        store.dispatch(actions.getAllGroupLength());
     }
 
     public render() {

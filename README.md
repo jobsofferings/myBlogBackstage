@@ -49,6 +49,11 @@
 &emsp;&emsp;`pages/All/All.tsx` 中的`componentDidMount`函数中<br>
 &emsp;&emsp;修改了部分类型<br>
 
++ 2020-4-26 第二次更新
+
+&emsp;&emsp;再次新更新一个表，但是未在Redux的defaultState中将保存默认数据作为请求数据，若报错请注释掉请求语句<br>
+&emsp;&emsp;修改了部分类型<br>
+
 #### English
 
 &emsp;&emsp;This is a background management project of React + Ts + Redux made by **jobsofferings**. Not completed yet, I hope to complete this project through my commit. The project already has a JS version, but I hope that through this completion, I can combine TS with React + Redux and requests, thank you.<br>
@@ -96,4 +101,9 @@ Open browser access `http://localhost:3000/`
 &emsp;&emsp;Have joined the job, the update frequency may be slowed down, hope to understand ~<br>
 &emsp;&emsp;A new table has been updated. The default data has been saved in Redux's defaultState as request data. If an error is reported, please comment out the request statement<br>
 &emsp;&emsp;In the `componentDidMount` function in` pages / All / All.tsx`<br>
+&emsp;&emsp;Modified some types<br>
+
++ 2020-4-26 Second update
+
+&emsp;&emsp;A new table is updated again, but the default data is not saved in Redux's defaultState as request data. If an error is reported, please comment out the request statement<br>
 &emsp;&emsp;Modified some types<br>

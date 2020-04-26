@@ -1,6 +1,6 @@
 import * as constants from '../constants'
-import { getIPDataApi, getStarArticlesApi } from '../../myFun/api'
-import { GetIpDateProps, GetStartArticlesDateProps, ArticlesDataListItem } from '../types';
+import { getIPDataApi, getStarArticlesApi, getAllGroupLengthApi } from '../../myFun/api'
+import { GetIpDateProps, GetStartArticlesDateProps, ArticlesDataListItem, AllGroupItem } from '../types';
 import { Dispatch } from 'redux';
 
 export interface LeftEnthusiasm {
@@ -16,23 +16,28 @@ export interface TopInputEnthusiasm {
     value: string
 }
 
-export type GetIPDataEnthusiasm = (dispatch: any) => void;
+export type GetIPDataEnthusiasm = (dispatch: Dispatch) => void;
 
 export interface GetIPDataBackEnthusiasm {
     type: constants.GET_IP_DATA;
     res: GetIpDateProps
 }
 
-export type GetStarArticlesEnthusiasm = (dispatch: any) => void;
+export type GetStarArticlesEnthusiasm = (dispatch: Dispatch) => void;
 
 export interface GetStarArticlesBackEnthusiasm {
     type: constants.GET_STAR_ARTICLES;
     res: GetStartArticlesDateProps
 }
 
-export type AllAction = LeftEnthusiasm | RightEnthusiasm | TopInputEnthusiasm | GetIPDataBackEnthusiasm | GetStarArticlesBackEnthusiasm;
+export type GetAllGroupLengthEnthusiasm = (dispatch: Dispatch) => void;
 
-export type withAction = GetIPDataEnthusiasm;
+export interface GetAllGroupLengthBackEnthusiasm {
+    type: constants.GET_ALL_GROUP_LENGTH;
+    res: AllGroupItem[]
+}
+
+export type AllAction = LeftEnthusiasm | RightEnthusiasm | TopInputEnthusiasm | GetIPDataBackEnthusiasm | GetStarArticlesBackEnthusiasm | GetAllGroupLengthBackEnthusiasm;
 
 /**
  * 控制左侧伸缩
@@ -113,3 +118,28 @@ function getStarArticleBack(res: GetStartArticlesDateProps): GetStarArticlesBack
         res
     }
 }
+
+/**
+ * 获得组别数量及组别种类名
+ **/
+export function getAllGroupLength(): GetAllGroupLengthEnthusiasm {
+    return (dispatch: Dispatch) => {
+        getAllGroupLengthApi().then((res: AllGroupItem[]) => {
+            dispatch(getAllGroupLengthBack(res));
+        }).catch((err: Error) => {
+            console.log(err);
+        })
+    };
+}
+
+
+/**
+ * 获得组别数量及组别种类名的回调
+ **/
+function getAllGroupLengthBack(res: AllGroupItem[]): GetAllGroupLengthBackEnthusiasm {
+    return {
+        type: constants.GET_ALL_GROUP_LENGTH,
+        res
+    }
+}
+
